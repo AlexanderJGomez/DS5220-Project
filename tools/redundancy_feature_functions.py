@@ -15,6 +15,8 @@ import math
 stop_words = set(stopwords.words('english'))
 PUNC_REMOVAL_RE = re.compile('[%s]' % re.escape(punctuation))
 NEWLINE_REMOVAL_RE = re.compile('[%s]' % '\n')
+
+# FOR FEATURE MAX N-GRAM REPETITION
 # Get max number of repetitions for n-grams in range start to end for each summary
 # Returns list of list of scores ordered from start to end
 def max_ngram_repetitions(summaries, start, end):
@@ -75,6 +77,7 @@ def lrs_helper(sentence, return_len=True):
         insert(root, s, i, s)
     return maxLen[0] if return_len else root
 
+#FOR FEATURE LONGEST REPEATED SUBSTRING
 def lrs(summaries):
     scores = []
     for summary in summaries:
@@ -82,7 +85,8 @@ def lrs(summaries):
     return scores
 
 
-
+#FOR FEATURE FROM EMBEDDING SIMILARITY SCORES
+#FOR ELMO AND UNIVERSAL SENTENCE ENCODER EMBEDDINGS
 def mean_sent_redundancy(sentences):
     if len(sentences) == 1:
         return 1
@@ -135,6 +139,7 @@ def traverse_node(node, level, prefix="", min_length=3):
         else:
             return [traverse_node(node.children[child_key], level+1, new_prefix) for child_key in searchable_children]
 
+#FOR REPEATED SUBSTRINGS COMBINATION FEATURE FROM Fan et al.
 def get_scores(sentence):
     node = lrs_helper(sentence, return_len=False)
     flattened_scores = list(flatten(traverse_node(node, 0)))
