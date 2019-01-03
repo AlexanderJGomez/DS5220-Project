@@ -1,3 +1,4 @@
+DS5220_Project_Report.pdf -> Scientific paper detailing analysis
 
 \pynbs -> we have all of the Jupyter Notebooks used to create features and models and run analyses
 
